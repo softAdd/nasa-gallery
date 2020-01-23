@@ -1,4 +1,4 @@
-#NASA-GALERY
+# NASA-GALERY
 
 The project built with Sass, JS and Webpack
 
