@@ -1,2 +1,39 @@
-h1
-    color: blue
+*
+    box-sizing: border-box
+
+html, body
+    margin: 0
+    padding: 0
+
+.header
+    display: flex
+    align-items: center
+    padding: 20px 10px 40px 10px
+
+.search
+    display: flex
+    align-items: center
+    width: 100%
+    max-width: 620px
+    padding: 5px 4px 5px 14px
+    border: 1px solid rgba(0, 0, 0, 0.2)
+    border-radius: 15px
+
+    &__input
+        flex-grow: 1
+        height: 100%
+        padding: 5px
+        border: none
+        outline: none
+        font-size: 14px
+        line-height: 20px
+
+    &__button
+        background: none
+        border: none
+        outline: none
+        cursor: pointer
+
+    &__image
+        height: 16px
+        margin: 0 5px
