@@ -1,0 +1,11 @@
+version: '2.4'
+
+services:
+  node:
+    container_name: restapi
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./restapi
+    ports:
+      - "5000:5000"
