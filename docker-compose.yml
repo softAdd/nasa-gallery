@@ -2,10 +2,25 @@ version: '2.4'
 
 services:
   node:
-    container_name: restapi
+    container_name: api
     restart: unless-stopped
     build:
       dockerfile: Dockerfile
-      context: ./restapi
+      context: ./api
     ports:
       - "5000:5000"
+    env_file:
+      - db.env
+    depends_on:
+      - couchdb
+  couchdb:
+    container_name: db
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+    ports:
+      - "5984:5984"
+    volumes:
+      - ./db/db_data :/opt/couchdb/data
+      - ./db/local.d :/opt/couchdb/etc/local.d
