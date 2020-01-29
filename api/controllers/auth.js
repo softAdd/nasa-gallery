@@ -1,10 +1,17 @@
-const PouchDB = require('pouchdb')
+const PouchDB = require('../pouchdb')
+const User = require('../pouchdb/models/User')
 const { COUCHDB_URL } = process.env
 const nasaUsersDB = new PouchDB(`${COUCHDB_URL}/nasa_users`, {
     skip_setup: true
 })
 
+const errorTypes = {
+    databaseError: 'database error'
+}
+
 module.exports.login = function (req, res) {
+    if (!req.body) return res.sendStatus(400)
+
     nasaUsersDB.allDocs({
         include_docs: true,
         attachments: true
@@ -19,7 +26,7 @@ module.exports.login = function (req, res) {
     }).catch(err => {
         res.status(200).json({
             login: {
-                errorType: 'database error',
+                errorType: errorTypes.databaseError,
                 admin_secret_url: COUCHDB_URL,
                 error: err
             }
@@ -28,7 +35,27 @@ module.exports.login = function (req, res) {
 }
 
 module.exports.register = function (req, res) {
-    res.status(200).json({
-        register: 'from controller'
+    if (!req.body) return res.sendStatus(400)
+
+    const user = new User({
+        email: req.body.email || '',
+        password: req.body.password || ''
+    })
+    nasaUsersDB.find({
+        selector: {
+            email: req.body.email
+        },
+        fields: ["email"],
+        limit: 1
+    }).then(result => {
+        res.status(200).json({
+            result,
+            exampleDocs: result.docs
+        })
+    }).catch(error => {
+        res.status(200).json({
+            errorType: errorTypes.databaseError,
+            error
+        })
     })
 }

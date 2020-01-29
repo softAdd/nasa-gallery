@@ -20,7 +20,9 @@ services:
       dockerfile: Dockerfile
       context: ./db
     ports:
-      - "5984:5984"
+      - "5983:5984"
+    env_file:
+      - db.env
     volumes:
       - ./db/db_data :/opt/couchdb/data
       - ./db/local.d :/opt/couchdb/etc/local.d
