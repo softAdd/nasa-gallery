@@ -5,30 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <title>Nasa Gallery</title>
 </head>
 
 <body>
     <header class="header">
         <a class="header-logo" href="#">
-            <img class="header-logo__image" src="" alt="logo">
+            <img class="header-logo__image" src="src/icons/NG.svg" alt="logo">
         </a>
         <div class="search">
             <input type="text" class="search__input">
-            <div class="search__button">
+            <button class="search__button">
                 <img class="search__image" src="src/icons/search.svg" alt="search">
             </button>
         </div>
-        <div class="profile">
-            <div class="profile__image"></div>
+        <div class="auth">
+            <button class="auth_button login-btn">Login</button>
+            <span class="auth__dash"> / </span>
+            <button class="auth_button register-btn">Register</button>
         </div>
     </header>
     <main class="main">
-        <div class="gallery__grid">
-            <div class="gallery-image__container">
-                <a href="#" class="gallery-image__link">
-                    <img class="gallery-image" src="" alt="image">
-                </a>
+        <div class="gallery">
+            <div class="gallery__row">
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/random/?tech,substance">
+                        <img class="gallery__image" src="https://source.unsplash.com/random/?tech,substance" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/random/?tech,yet">
+                        <img class="gallery__image" src="https://source.unsplash.com/random/?tech,yet" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/random/?tech,choose">
+                        <img class="gallery__image" src="https://source.unsplash.com/random/?tech,choose" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/random/?tech,crew">
+                        <img class="gallery__image" src="https://source.unsplash.com/random/?tech,crew" alt="image">
+                    </a>
+                </div>
+            </div>
+            <div class="gallery__row">
+                <div class="gallery__item">
+                    <a href="https://i.ytimg.com/vi/LW9EzgzFHlk/hqdefault_live.jpg">
+                        <img class="gallery__image" src="https://i.ytimg.com/vi/LW9EzgzFHlk/hqdefault_live.jpg" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://mmedia.ozone.ru/multimedia/1016998171.jpg">
+                        <img class="gallery__image" src="https://mmedia.ozone.ru/multimedia/1016998171.jpg" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/daily">
+                        <img class="gallery__image" src="https://source.unsplash.com/daily" alt="image">
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="https://source.unsplash.com/random">
+                        <img class="gallery__image" src="https://source.unsplash.com/random" alt="image">
+                    </a>
+                </div>
             </div>
         </div>
     </main>

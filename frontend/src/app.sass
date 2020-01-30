@@ -2,12 +2,20 @@
     box-sizing: border-box
 
 html, body
+    height: 100%
     margin: 0
     padding: 0
+
+body
+    background-color: #eee
 
 .header
     display: flex
     align-items: center
+    justify-content: space-between
+    width: 100%
+    max-width: 1896px
+    margin: 0 auto
     padding: 20px 10px 40px 10px
 
 .search
@@ -25,8 +33,9 @@ html, body
         padding: 5px
         border: none
         outline: none
+        background-color: #eee
         font-size: 14px
-        line-height: 20px
+        line-height: 20px    
 
     &__button
         background: none
@@ -37,3 +46,27 @@ html, body
     &__image
         height: 16px
         margin: 0 5px
+
+.gallery
+    width: 100%
+    max-width: 1896px
+    margin: 0 auto
+    padding: 0 5px
+
+    &__row
+        display: flex
+        width: 100%
+
+    &__item
+        flex-grow: 1
+        min-width: 15%
+        max-height: 300px
+        margin: 5px
+        box-shadow: 0 0 8px #333
+        border-radius: 4px
+        overflow: hidden
+
+    &__image
+        width: 100%
+        min-height: 100%
+        object-fit: cover
