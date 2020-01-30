@@ -20,6 +20,17 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(png|jpg|svg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'icons/[name].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },

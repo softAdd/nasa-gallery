@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
   node:
-    container_name: api
+    container_name: node
     restart: unless-stopped
     build:
       dockerfile: Dockerfile
@@ -13,16 +13,26 @@ services:
       - db.env
     depends_on:
       - couchdb
+
   couchdb:
-    container_name: db
+    container_name: couchdb
     restart: unless-stopped
     build:
       dockerfile: Dockerfile
       context: ./db
     ports:
-      - "5983:5984"
+      - "5984:5984"
     env_file:
       - db.env
     volumes:
       - ./db/db_data :/opt/couchdb/data
       - ./db/local.d :/opt/couchdb/etc/local.d
+
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    ports:
+      - "80:80"

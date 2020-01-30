@@ -63,8 +63,8 @@ module.exports.register = async function (req, res) {
                     })
                     return console.error(err)
                 }
-                res.status(200).json({
-                    status: response
+                res.status(201).json({
+                    success: 'account created'
                 })
             })
         }
