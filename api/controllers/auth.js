@@ -28,7 +28,7 @@ module.exports.register = async function (req, res) {
             },
             limit: 1
         })
-        if (docs > 0) {
+        if (docs.length > 0) {
             res.status(409).json({
                 message: 'email is busy'
             })
