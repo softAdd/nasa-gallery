@@ -1,6 +1,8 @@
 const moment = require('moment')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const PouchDB = require('../pouchdb')
+const { jwtKey } = require('../config')
 const { COUCHDB_URL } = process.env
 const nasaUsersDB = new PouchDB(`${COUCHDB_URL}/nasa_users`, {
     skip_setup: false
@@ -15,7 +17,42 @@ const checkLoginRequest = (req, res) => {
 module.exports.login = async function (req, res) {
     checkLoginRequest(req, res)
 
-    res.sendStatus(200)
+    try {
+        const { docs } = await nasaUsersDB.find({
+            selector: {
+                email: req.body.email
+            },
+            limit: 1
+        })
+        if (docs.length > 0) {
+            const user = docs[0]
+
+            bcrypt.compare(req.body.password, user.password, async function(err, result) {
+                if (err) throw new Error('Error while comparing passwords')
+
+                if (result) {
+                    const token = jwt.sign({
+                        email: user.email,
+                        userId: user._id
+                    }, jwtKey, { expiresIn: 60 * 60 })
+
+                    res.status(200).json({
+                        token: `Bearer ${token}`
+                    })
+                } else {
+                    res.status(401).json({
+                        message: 'wrong password'
+                    })
+                }
+            })
+        } else {
+            res.status(404).json({
+                message: 'user is not exists'
+            })
+        }
+    } catch (err) {
+        res.sendStatus(500)
+    }
 }
 
 module.exports.register = async function (req, res) {
@@ -55,8 +92,6 @@ module.exports.register = async function (req, res) {
             })
         }
     } catch (err) {
-        res.status(500).json({
-            error: err
-        })
+        res.sendStatus(500)
     }
 }
