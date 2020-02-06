@@ -9,6 +9,10 @@ services:
       context: ./api
     ports:
       - "5000:5000"
+    command:
+      - sh
+      - "-c"
+      - "npm run dev"
     env_file:
       - dev-db.env
     depends_on:
@@ -34,5 +38,12 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./frontend
+      target: build
     ports:
-      - "8080:8080"
+      - "3000:3000"
+    command:
+      - sh
+      - "-c"
+      - "npm run start"
+    volumes:
+      - ./frontend :/app
