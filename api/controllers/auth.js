@@ -1,12 +1,9 @@
 const moment = require('moment')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const PouchDB = require('../pouchdb')
 const { jwtKey } = require('../config')
-const { COUCHDB_URL } = process.env
-const nasaUsersDB = new PouchDB(`${COUCHDB_URL}/nasa_users`, {
-    skip_setup: false
-})
+const { nasaUsersDB } = require('../pouchdb')
+const errorHandler = require('../utils/errorHandler')
 
 const checkLoginRequest = (req, res) => {
     if (!req.body) return res.sendStatus(400)
@@ -51,7 +48,7 @@ module.exports.login = async function (req, res) {
             })
         }
     } catch (err) {
-        res.sendStatus(500)
+        errorHandler(res, err)
     }
 }
 
@@ -79,8 +76,7 @@ module.exports.register = async function (req, res) {
                     const user = {
                         _id: `${req.body.email}-${moment().format("DD.MM.YYYY-hh:mm:ss")}`,
                         email: req.body.email,
-                        password: hash,
-                        savedImages: []
+                        password: hash
                     }
 
                     await nasaUsersDB.put(user, err => {
@@ -92,6 +88,6 @@ module.exports.register = async function (req, res) {
             })
         }
     } catch (err) {
-        res.sendStatus(500)
+        errorHandler(res, err)
     }
 }
