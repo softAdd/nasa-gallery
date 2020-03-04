@@ -45,5 +45,3 @@ services:
       - sh
       - "-c"
       - "npm run start"
-    volumes:
-      - ./frontend :/app
